@@ -1,0 +1,68 @@
+pipeline {
+    
+    agent any
+    
+    parameters {
+        string (name: 'branch', defaultValue: 'main', description: 'some info')
+    }
+
+    environment {
+        WORDS = "I AM A WORDS HUMAN"
+        SWORDS = "I-AM-SWORDS-HUMAN"
+    }
+
+    stages {
+        stage ("SCM") {
+            steps {
+                git branch: "${params.branch}", url: 'https://github.com/venkyscafe/Hello-Parallel.git'
+            }
+        }
+
+        stage ("Parallel Phase") {
+            parallel {
+                stage ("Static Analysis") {
+                    steps {
+                        echo "Perform Static Analysis"
+                        sleep time: 3, unit: 'SECONDS'
+                        script {
+                            def words = env.WORDS.split(' ')
+                            for (word in words) {
+                                echo word
+                            }
+                        }
+                    }
+                }
+
+                stage ("Build and Unit Test") {
+                    stages {
+                        stage ("Build") {
+                            steps {
+                                echo "Build the code"
+                                sleep time: 3, unit: 'SECONDS'
+                                script {
+                                    def swords = env.SWORDS.split('-')
+                                    for (sword in swords) {
+                                        echo sword
+                                    }
+                                }
+                            }
+                        }
+                        stage ("Unit Test") {
+                            steps {
+                                echo "Execute Unit Testing"
+                                sleep time: 3, unit: 'SECONDS'
+                                echo "Unit Test Completed"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage ("Package") {
+            steps {
+                echo "Package the code for release"
+            }
+        }
+    }
+}
