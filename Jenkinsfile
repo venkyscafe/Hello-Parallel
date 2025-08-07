@@ -13,25 +13,33 @@ pipeline {
             }
         }
 
-        stage ("Static Analysis") {
-            steps {
-                echo "perform Static Analysis"
-                sleep time: 3, unit: 'SECONDS'
-            }
-        }
+        stage ("Parallel Phase") {
+                parallel {
+                stage ("Static Analysis") {
+                    steps {
+                        echo "perform Static Analysis"
+                        sleep time: 3, unit: 'SECONDS'
+                    }
+                }
 
-        stage ("Build") {
-            steps {
-                echo "build the code"
-                sleep time: 3, unit: 'SECONDS'
-            }
-        }
+                stage ("Build and Unit Test") {
+                    stages {
+                        stage ("Build") {
+                            steps {
+                                echo "build the code"
+                                sleep time: 3, unit: 'SECONDS'
+                            }
+                        }
 
-        stage ("Unit Test") {
-            steps {
-                echo "execute unit tests"
-                sleep time: 3, unit: 'SECONDS'
-            }
+                        stage ("Unit Test") {
+                            steps {
+                                echo "execute unit tests"
+                                sleep time: 3, unit: 'SECONDS'
+                            }
+                        }
+                    }
+                }
+            } 
         }
 
         stage ("Package") {
