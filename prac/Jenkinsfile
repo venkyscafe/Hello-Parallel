@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         WORDS = "I AM A WORDS HUMAN"
-        SWORDS = "I-AM-SWORDS-HUMAN"
+        SWORDS = "I-AM-A-SWORDS-HUMAN"
     }
 
     stages {
@@ -25,7 +25,7 @@ pipeline {
                 script {
                     def words = env.WORDS.split(' ')
                     for (word in words) {
-                        echo word
+                        echo "SA"+word
                     }
                 }
             }
@@ -38,7 +38,7 @@ pipeline {
                 script {
                     def swords = env.SWORDS.split('-')
                     for (sword in swords) {
-                        echo sword
+                        echo "B"+sword
                     }
                 }
             }
@@ -48,7 +48,12 @@ pipeline {
             steps {
                 echo "Execute Unit Testing"
                 sleep time: 3, unit: 'SECONDS'
-                echo "Unit Test Completed"
+                script {
+                    def words = env.WORDS.split(' ')
+                    for (word in words) {
+                        echo "UT"+word
+                    }
+                }
             }
         }
 
