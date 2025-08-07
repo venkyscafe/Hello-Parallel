@@ -18,44 +18,37 @@ pipeline {
             }
         }
 
-        stage ("Parallel Phase") {
-            parallel {
-                stage ("Static Analysis") {
-                    steps {
-                        echo "Perform Static Analysis"
-                        sleep time: 3, unit: 'SECONDS'
-                        script {
-                            def words = env.WORDS.split(' ')
-                            for (word in words) {
-                                echo word
-                            }
-                        }
+        stage ("Static Analysis") {
+            steps {
+                echo "Perform Static Analysis"
+                sleep time: 3, unit: 'SECONDS'
+                script {
+                    def words = env.WORDS.split(' ')
+                    for (word in words) {
+                        echo word
                     }
                 }
+            }
+        }
 
-                stage ("Build and Unit Test") {
-                    stages {
-                        stage ("Build") {
-                            steps {
-                                echo "Build the code"
-                                sleep time: 3, unit: 'SECONDS'
-                                script {
-                                    def swords = env.SWORDS.split('-')
-                                    for (sword in swords) {
-                                        echo sword
-                                    }
-                                }
-                            }
-                        }
-                        stage ("Unit Test") {
-                            steps {
-                                echo "Execute Unit Testing"
-                                sleep time: 3, unit: 'SECONDS'
-                                echo "Unit Test Completed"
-                            }
-                        }
+        stage ("Build") {
+            steps {
+                echo "Build the code"
+                sleep time: 3, unit: 'SECONDS'
+                script {
+                    def swords = env.SWORDS.split('-')
+                    for (sword in swords) {
+                        echo sword
                     }
                 }
+            }
+        }
+
+        stage ("Unit Test") {
+            steps {
+                echo "Execute Unit Testing"
+                sleep time: 3, unit: 'SECONDS'
+                echo "Unit Test Completed"
             }
         }
 
