@@ -15,6 +15,7 @@ pipeline {
 
         stage ("Parallel Phase") {
                 parallel {
+                    
                 stage ("Static Analysis") {
                     steps {
                         echo "perform Static Analysis"
@@ -44,6 +45,7 @@ pipeline {
                 }
             }
         }
+
         stage ("Package") {
             steps {
                 echo "Packaging the code for release"
