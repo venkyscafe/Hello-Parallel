@@ -19,6 +19,7 @@ pipeline {
                     steps {
                         echo "perform Static Analysis"
                         sleep time: 3, unit: 'SECONDS'
+                        echo "Static Analysis Completed"
                     }
                 }
 
@@ -28,6 +29,7 @@ pipeline {
                             steps {
                                 echo "build the code"
                                 sleep time: 3, unit: 'SECONDS'
+                                echo "Build Completed"
                             }
                         }
 
@@ -35,13 +37,13 @@ pipeline {
                             steps {
                                 echo "execute unit tests"
                                 sleep time: 3, unit: 'SECONDS'
+                                echo "Unit Test Completed"
                             }
                         }
                     }
                 }
-            } 
+            }
         }
-
         stage ("Package") {
             steps {
                 echo "Packaging the code for release"
