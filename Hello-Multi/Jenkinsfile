@@ -1,0 +1,78 @@
+pipeline {
+    agent any
+
+    // parameters {
+    //     string (name: 'branch', defaultValue: 'main', description: 'some info')
+    // }
+
+    environment {
+        WORDS = "I AM A WORDS HUMAN"
+        SWORDS = "I AM A SWORDS HUMAN"
+    }
+
+    triggers {
+        cron ('0 3 * * 1-5')
+    }
+    stages {
+        // stage ("SCM") {
+        //     steps {
+        //         git branch: "${params.branch}", url: 'https://github.com/venkyscafe/Hello-Parallel.git'
+        //     }
+        // }
+
+        stage ("Parallel Phase") {
+                parallel {
+                stage ("Static Analysis") {
+                    steps {
+                        echo "Perform Static Analysis"
+                        sleep time: 3, unit: 'SECONDS'
+                        script {
+                            def words = env.WORDS.split(' ')
+                            for (word in words) {
+                                echo "SA "+word
+                            }
+                        echo "Static Analysis Completed"    
+                        }
+                    }
+                }
+
+                stage ("Build and Unit Testing") {
+                    stages {
+                        stage ("Build") {
+                            steps {
+                                echo "Build the Code"
+                                sleep time:3, unit: 'SECONDS'
+                                script {
+                                    def swords = env.SWORDS.split('-')
+                                    for (sword in swords) {
+                                        echo "B "+sword
+                                    }
+                                }
+                                echo "Building the Code is Done"
+                            }
+                        }
+                        stage ("Unit Testing") {
+                            steps {
+                                echo "Execute the Unit Testing"
+                                sleep time: 3, unit: 'SECONDS'
+                                script {
+                                    def words = env.WORDS.split(' ')
+                                    for (word in words) {
+                                        echo "UT "+word
+                                    }
+                                }
+                                echo "Unit Testing is Completed"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage ("Packaging the code for Release") {
+            steps {
+                echo "Packaging the code for Release"
+            }
+        }
+    }
+}
