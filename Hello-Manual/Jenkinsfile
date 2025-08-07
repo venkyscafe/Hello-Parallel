@@ -1,0 +1,26 @@
+pipeline {
+    
+    agent any
+
+    stages {
+        stage {"Build"} {
+            steps {
+                echo "Build"
+                script {
+                    def number = input (
+                        message: "Enter a value",
+                        parameters [
+                            string (name: 'value', description: 'Enter a value')
+                        ]
+                    )
+                    def num = number.toInteger()
+                    if (num % 3 == 0) {
+                        echo "Divisible by 3"
+                    }else{
+                        error "not divisible by 3"
+                    }
+                }
+            }
+        }
+    }
+}
