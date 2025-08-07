@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    stages {
+        stage ("Build") {
+            steps {
+                script {
+                    echo "Build"
+                    def number = input (
+                        message: "Enter a Value",
+                        parameters: [
+                            string (name: 'value', description: 'Enter a Value')
+                        ]
+                    )
+                    def num = number.toInteger()
+                    if (num % 2 == 0) {
+                        echo "Divisible by 2"
+                    }else{
+                        error "Not Divisible by 2"
+                    }
+                }
+            }
+        }
+    }
+}
