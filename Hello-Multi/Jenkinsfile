@@ -25,7 +25,7 @@ pipeline {
                 script {
                     def words = env.WORDS.split(' ')
                     for (word in words) {
-                        echo "SA"+word
+                        echo "SA "+word
                     }
                 }
             }
@@ -38,7 +38,7 @@ pipeline {
                 script {
                     def swords = env.SWORDS.split('-')
                     for (sword in swords) {
-                        echo "B"+sword
+                        echo "B "+sword
                     }
                 }
             }
@@ -51,7 +51,7 @@ pipeline {
                 script {
                     def words = env.WORDS.split(' ')
                     for (word in words) {
-                        echo "UT"+word
+                        echo "UT "+word
                     }
                 }
             }
