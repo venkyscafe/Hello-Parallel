@@ -21,7 +21,7 @@ pipeline {
         stage ("Static Analysis") {
             steps {
                 echo "Perform Static Analysis"
-                sleep time: 3, unit: 'SECONDS'
+                // sleep time: 3, unit: 'SECONDS'
                 script {
                     def words = env.WORDS.split(' ')
                     for (word in words) {
@@ -34,7 +34,7 @@ pipeline {
         stage ("Build") {
             steps {
                 echo "Build the code"
-                sleep time: 3, unit: 'SECONDS'
+                // sleep time: 3, unit: 'SECONDS'
                 script {
                     def swords = env.SWORDS.split('-')
                     for (sword in swords) {
@@ -47,7 +47,7 @@ pipeline {
         stage ("Unit Test") {
             steps {
                 echo "Execute Unit Testing"
-                sleep time: 3, unit: 'SECONDS'
+                // sleep time: 3, unit: 'SECONDS'
                 script {
                     def words = env.WORDS.split(' ')
                     for (word in words) {
