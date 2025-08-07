@@ -9,7 +9,7 @@ pipeline {
                 script {
                     def number = input (
                         message: "Enter a value",
-                        parameters [
+                        parameters: [
                             string (name: 'value', description: 'Enter a value')
                         ]
                     )
