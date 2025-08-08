@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+    stages {
+        stage ("Decrypt") {
+            steps {
+                script {
+                    try {
+                        echo "Decrpyting...."
+                        echo "Decrpyting 'file1'"
+                        throw new Exception ("Decryption Failed")
+                        echo "Decryption Successfull"
+                    } catch (Exception e) {
+                        echo "Decryption Error: ${e.message}"
+                        echo "Deleting"
+                        throw e
+                    } finally {
+                        echo "Deleted"
+                    }
+                }
+            }
+        }
+        stage ("ELT"){
+            steps {
+                script {
+                    try {
+                        echo "ELT..."
+                        echo "Checking Decrypt Status"
+                        echo "Loading file1 to database"
+                        echo "ETL Successfull"
+                    } catch (Exception e) {
+                        echo "ETL Error: ${e.message}"
+                        throw e
+                    } finally {
+                        echo "Workspace Deleted"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo "Pipeline failed"
+            echo "Sending Alert"
+        }
+    }
+}
