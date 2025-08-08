@@ -40,11 +40,11 @@ pipeline {
     post {
         failure {
             echo "Pipeline Failed"
-            echo "Sending Alert"
+            echo "Sending Failed Alert"
         }
         success {
-            echo "Pipeline Failed"
-            echo "Sending Alert"
+            echo "Pipeline Success"
+            echo "Sending Success Alert"
         }
     }
 }
