@@ -24,7 +24,7 @@ pipeline {
                         echo "ELT starting.."
                         echo "Checking Decryption Status"
                         echo "Loading file to DB"
-                        throw new Exception ("DB Connection Failed")
+                        //throw new Exception ("DB Connection Failed")
                         echo "ELT Success !!"
                     } catch (Exception e) {
                         echo "Deleting Incomplete File : ${e.message}"
