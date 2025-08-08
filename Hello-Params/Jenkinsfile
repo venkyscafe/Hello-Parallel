@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        text (name: 'Text', defaultValue: 'Please Enter Your Porject Description')
+        text (name: 'Text', defaultValue: 'Please Enter Your Project Description')
         booleanParam (name: 'Admin', defaultValue: false, description: 'Are you an Admin?')
         choice (name: 'Choice', choices: ['Banana', 'Apple'], description: 'Selected Choice')
     }
