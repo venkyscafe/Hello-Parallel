@@ -19,7 +19,7 @@ pipeline {
     }
     post {
         always {
-            archiveArtifact artifact: ARTIFACTS, followSymlink: false
+            archiveArtifacts artifacts: ARTIFACTS, followSymlinks: false
         }
     }
 }
