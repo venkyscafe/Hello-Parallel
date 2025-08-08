@@ -1,0 +1,17 @@
+pipeline{
+    agent any
+    parameters {
+        text (name: "Text", defaultValue: " ")
+        booleanParam (name: "Admin", defaultValue: false, description:" ")
+        choice (name: 'Choice', choices: ['Banana', 'Apple'], description: " ")
+    }
+    stages {
+        stage ("Enter the Dragon") {
+            steps {
+                echo "Text: ${params.Text}"
+                echo "Admin: ${params.Admin ? Yes : No }"
+                echo "Choice: ${params.Choice}"
+            }
+        }
+    }
+}
