@@ -28,7 +28,7 @@ pipeline {
                         echo "ELT Success !!"
                     } catch (Exception e) {
                         echo "Deleting Incomplete File : ${e.message}"
-                        throw e
+                        //throw e
                     } finally {
                         echo "Deleting Workspace"
                     }
