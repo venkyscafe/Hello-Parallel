@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage ("SCM") {
             steps{
-                git branch: '${params.branch}', url: 'https://github.com/venkyscafe/Hello-Parallel.git'
+                git branch: "${params.branch}", url: 'https://github.com/venkyscafe/Hello-Parallel.git'
             }
         }
         stage ("List all Environment Variables") {
