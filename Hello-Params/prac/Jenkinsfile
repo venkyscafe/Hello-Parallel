@@ -9,7 +9,7 @@ pipeline{
         stage ("Enter the Dragon") {
             steps {
                 echo "Text: ${params.Text}"
-                echo "Admin: ${params.Admin ? Yes : No }"
+                echo "Admin: ${params.Admin ? 'Yes' : 'No' }"
                 echo "Choice: ${params.Choice}"
             }
         }
