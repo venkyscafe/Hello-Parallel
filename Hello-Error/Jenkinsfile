@@ -14,7 +14,7 @@ pipeline {
                         echo "Deleting"
                         throw e
                     } finally {
-                        echo "Deleted"
+                        echo "File Deleted"
                     }
                 }
             }
@@ -25,7 +25,8 @@ pipeline {
                     try {
                         echo "ELT..."
                         echo "Checking Decrypt Status"
-                        echo "Loading file1 to database"
+                        throw new Exception ("ETL Failed")
+                        echo "Loading file1 to database"                        
                         echo "ETL Successfull"
                     } catch (Exception e) {
                         echo "ETL Error: ${e.message}"
