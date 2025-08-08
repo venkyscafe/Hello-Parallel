@@ -1,16 +1,16 @@
 pipeline {
     agent any
     parameters {
-        text (name: 'Enter-Project-Details', defaultValue: 'Please Enter Your Porject Description')
-        booleanParam (name: 'is-Admin', defaultValue: false, description: 'Are you an Admin?')
-        choice (name: 'Select-your-Choice', choices: ['Banana', 'Apple'], description: 'Selected Choice')
+        text (name: 'Text', defaultValue: 'Please Enter Your Porject Description')
+        booleanParam (name: 'Admin', defaultValue: false, description: 'Are you an Admin?')
+        choice (name: 'Choice', choices: ['Banana', 'Apple'], description: 'Selected Choice')
     }
     stages {
         stage ("pre-flight") {
             steps {
-                echo "Text: ${params.Enter-Project-Details}"
-                echo "Admin user? ${params.is-Admin ? 'Yes' : 'No'}"
-                echo "Selected Choice: ${params.Select-your-Choice}"
+                echo "Text: ${params.Text}"
+                echo "Admin user? ${params.Admin ? 'Yes' : 'No'}"
+                echo "Selected Choice: ${params.Choice}"
             }
         }
     }
