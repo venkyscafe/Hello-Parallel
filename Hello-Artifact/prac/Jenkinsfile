@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    environment {
+        ARTIFACTS = "tests/*.xml"
+    }
+    stages {
+        stage ("Build") {
+            steps {
+                echo "Build the code"
+            }
+        }
+        stage ("Unit Test") {
+            steps {
+                echo "Execute Unit Testing"
+                sh 'mkdir -p tests && echo "Test Results are in" >> tests/artifactresults.xml'
+                error "Broken Tests Break the Build"
+            }
+        }
+    }
+    post {
+        always {
+            archiveArtifact artifact: ARTIFACTS, followSymlink: false
+        }
+    }
+}
